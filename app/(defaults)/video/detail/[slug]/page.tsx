@@ -1,8 +1,31 @@
+
 import React from 'react';
 import Link from "next/link";
 import IconPlayCircle from "@/components/icon/icon-play-circle";
+import {getTags, getVideoPost} from "@/components/lib/interface";
+import Image from "next/image";
+import {PortableText} from '@portabletext/react'
+import {urlFor} from "@/components/lib/client";
+import CodeHighlight from "@/components/highlight";
+import VideoPlayer from "@/components/pages/videoPlayer";
 
-const PageComponent = () => {
+
+
+interface Params {
+    params: {
+        slug: string
+    }
+}
+
+
+export const revalidate = 60;
+
+const PageComponent = async ({params}: Params) => {
+
+    const post = await getVideoPost(params?.slug);
+    const tags = await getTags();
+    // console.log(post, "post");
+
     return (
       <>
           <ul className="flex space-x-2 rtl:space-x-reverse">
@@ -21,7 +44,7 @@ const PageComponent = () => {
           <div className="grid w-full grid-cols-1 sm:grid-cols-4 gap-4 p-5">
               <div className="panel h-full sm:col-span-3">
                   <div className="flex items-center justify-center">
-                      <h1 className="m-4 text-4xl dark:text-white-light">如何清空 JavaScript 数组的内容</h1>
+                      <h1 className="m-4 text-4xl dark:text-white-light">{post.title}</h1>
                   </div>
 
 
@@ -31,9 +54,11 @@ const PageComponent = () => {
                               <h6 className="mb-2 text-gray-700 dark:text-gray-100">标签</h6>
                               <p className="text-gray-500  text-15 mb-3  flex  justify-center gap-2 m-3 dark:text-white-dark">
 
-                                      <Link href={"/article/tag-list?tag="}>
-                                          <span>java</span>
+                                  {post?.tags.map((item: any, index: number) => (
+                                      <Link href={"/video/tag-list?tag=" + item.currentSlug} key={index}>
+                                          <span>{item.name}</span>
                                       </Link>
+                                  ))}
 
                               </p>
                           </div>
@@ -41,7 +66,7 @@ const PageComponent = () => {
                       <div className="col-span-4">
                           <div className="text-center">
                               <h6 className="mb-2 text-gray-700 dark:text-gray-100">日期</h6>
-                              <p className="text-gray-500  text-15 mb-3 dark:text-white-dark">2024/2/25 22:44:08</p>
+                              <p className="text-gray-500  text-15 mb-3 dark:text-white-dark">{new Date(post._createdAt).toLocaleString()}</p>
                           </div>
                       </div>
                       <div className="col-span-4">
@@ -56,24 +81,23 @@ const PageComponent = () => {
 
                   <div className="mt-6 w-full flex  flex-col items-center">
 
-                      <div className="group w-5/6 relative h-[400px] overflow-hidden rounded-md">
-                          <img src='/assets/images/knowledge/image-7.jpg' alt="video tutorial" className="h-full w-full cursor-pointer object-cover"  />
-                          <button
-                              type="button"
-                              className="absolute left-1/2 top-1/2 grid h-[62px] w-[62px] -translate-x-1/2 -translate-y-1/2 place-content-center rounded-full text-white duration-300 group-hover:scale-110"
-                          >
-                              <IconPlayCircle className="h-[62px] w-[62px]" fill={true} />
-                          </button>
-
+                      <div className="w-full grid place-content-center">
+                          <VideoPlayer url={post.video_url} img={post.coverImage}/>
                       </div>
 
                   </div>
 
                   <hr className="my-6 border-gray-100 dark:border-zinc-600"/>
 
-                  <p className="text-xl dark:text-white-light">
-                      另一个常用的方法是使用 splice() 方法。此函数将在删除条目之前返回数组的副本，如果您想在清除数组之前进行重新分配，这将很有帮助
-                  </p>
+                  <div className="mt-4">
+                      <div className={richTextStyles}>
+                          <PortableText
+                              value={post?.content}
+                              components={myPortableTextComponents}
+                          />
+                      </div>
+
+                  </div>
 
               </div>
               <div className="panel h-full sm:col-span-1 flex flex-col items-center">
@@ -84,9 +108,15 @@ const PageComponent = () => {
 
                   <div className="flex gap-4 w-full">
 
-                      <Link href={"/article/tag-list?tag="} >
-                                <span className="badge bg-primary" >java</span>
-                      </Link>
+                      {
+                          tags.map((item: any, index: number) => (
+                              <Link href={"/video/tag-list?tag=" + item.currentSlug} key={index}>
+                                <span className={
+                                    "badge " + item.colorValue
+                                } key={index}>{item.name}</span>
+                              </Link>
+                          ))
+                      }
 
                   </div>
 
@@ -136,3 +166,46 @@ const PageComponent = () => {
 };
 
 export default PageComponent;
+
+
+
+
+const myPortableTextComponents = {
+    types: {
+        image: ({value}: any) => (
+            <img
+                src={urlFor(value).url()}
+                alt="Post"
+                className='m-10 w-fit h-[300px] object-cover border border-gray-100 dark:border-zinc-600 dark:bg-zinc-700 mx-auto p-1 rounded'
+            />
+        ),
+        code: ({value}: any) => (
+            <div className='my-2 mb-6'>
+                <CodeHighlight>
+                    <pre className="language-xml">
+                      {value.code}
+                    </pre>
+                </CodeHighlight>
+
+            </div>
+        )
+    },
+};
+
+const richTextStyles = `
+mt-8
+text-justify
+px-4
+w-full
+m-auto
+text-lg
+prose-headings:my-5
+prose-heading:text-2xl
+prose-p:mb-5
+prose-p:leading-7
+prose-li:list-disc
+prose-li:leading-7
+prose-li:ml-4
+dark:text-white-light,
+
+`;

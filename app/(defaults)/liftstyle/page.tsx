@@ -1,64 +1,71 @@
 import React from 'react';
 import {Metadata} from "next";
+import {getDiaryList} from "@/components/lib/interface";
+import LiftCard from "@/components/pages/liftCard";
+import Pagination from "@/components/pages/pagination";
 
 
 export const metadata: Metadata = {
     title: '程序人生',
 };
-const PageComponent = () => {
+
+
+export const revalidate = 60;
+const PageComponent =async ({searchParams}:any) => {
+
+    let page = parseInt(searchParams.page, 10);
+
+    page = !page || page < 1 ? 1 : page;
+
+    const perPage:number = 4;
+
+    const {data,count} = await getDiaryList((page-1)*perPage,(page-1)*perPage+perPage);
+
+    const totalPages = Math.ceil(count / perPage);
+
+    const prevPage = page - 1 > 0 ? page - 1 : 1;
+
+    const nextPage = page + 1;
+
+    const isPageOutOfRange = page > totalPages;
+
+    const pageNumbers = [];
+    const offsetNumber = 3;
+    for (let i = page - offsetNumber; i <= page + offsetNumber; i++) {
+        if (i >= 1 && i <= totalPages) {
+            pageNumbers.push(i);
+        }
+    }
+
+
     return (
         <>
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-3  pt-5">
-                <div
-                    className="space-y-5 rounded-md border border-white-light bg-white p-5 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20),0px_12px_24px_-4px_rgba(145,158,171,0.12)] dark:border-[#1B2E4B] dark:bg-black">
-                    <div className="max-h-56 overflow-hidden rounded-md">
-                        <img src="/assets/images/knowledge/image-1.jpg" alt="..." className="w-full object-cover"/>
-                    </div>
-                    <h5 className="text-xl dark:text-white">工作与生活如何平衡</h5>
-                    <div className="flex">
-                        <div className="me-4 overflow-hidden rounded-full bg-white-dark">
-                            <img src="/assets/images/logo.png" className="h-12 w-12 object-cover" alt="profile1"/>
-                        </div>
-                        <div className="flex-1">
-                            <h4 className="mb-1.5 font-semibold dark:text-white">前端达人</h4>
-                            <p>{new Date().toLocaleString()}</p>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    className="space-y-5 rounded-md border border-white-light bg-white p-5 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20),0px_12px_24px_-4px_rgba(145,158,171,0.12)] dark:border-[#1B2E4B] dark:bg-black">
-                    <div className="max-h-56 overflow-hidden rounded-md">
-                        <img src="/assets/images/knowledge/image-1.jpg" alt="..." className="w-full object-cover"/>
-                    </div>
-                    <h5 className="text-xl dark:text-white">工作与生活如何平衡</h5>
-                    <div className="flex">
-                        <div className="me-4 overflow-hidden rounded-full bg-white-dark">
-                            <img src="/assets/images/logo.png" className="h-12 w-12 object-cover" alt="profile1"/>
-                        </div>
-                        <div className="flex-1">
-                            <h4 className="mb-1.5 font-semibold dark:text-white">前端达人</h4>
-                            <p>{new Date().toLocaleString()}</p>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    className="space-y-5 rounded-md border border-white-light bg-white p-5 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20),0px_12px_24px_-4px_rgba(145,158,171,0.12)] dark:border-[#1B2E4B] dark:bg-black">
-                    <div className="max-h-56 overflow-hidden rounded-md">
-                        <img src="/assets/images/knowledge/image-1.jpg" alt="..." className="w-full object-cover"/>
-                    </div>
-                    <h5 className="text-xl dark:text-white">工作与生活如何平衡</h5>
-                    <div className="flex">
-                        <div className="me-4 overflow-hidden rounded-full bg-white-dark">
-                            <img src="/assets/images/logo.png" className="h-12 w-12 object-cover" alt="profile1"/>
-                        </div>
-                        <div className="flex-1">
-                            <h4 className="mb-1.5 font-semibold dark:text-white">前端达人</h4>
-                            <p>{new Date().toLocaleString()}</p>
-                        </div>
-                    </div>
-                </div>
+                {
+                    data.map((item:any,index:number)=>(
+                        <LiftCard key={index}
+                                  url={item.coverImage}
+                                  title={item.title}
+                                  content={item.smallDescription}
+                                  author='前端达人'
+                                  avatar='/assets/images/logo.png'
+                                  slug={item.currentSlug}
+                                  date={item._createdAt}/>
+                    ))
+                }
+            </div>
 
-
+            <div className="max-w-full my-10">
+                <div className="flex w-full flex-col justify-center">
+                    <Pagination
+                        isPageOutOfRange={isPageOutOfRange}
+                        page={page}
+                        prevPage={prevPage}
+                        pageNumbers={pageNumbers}
+                        nextPage={nextPage}
+                        tagPath={null}
+                    />
+                </div>
             </div>
         </>
     );

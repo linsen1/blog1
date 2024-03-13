@@ -1,11 +1,10 @@
-import React, {FormEvent} from 'react';
-import {client, urlFor} from "@/components/lib/client";
-import Image from "next/image";
+import React from 'react';
 import Link from "next/link";
+import {urlFor} from "@/components/lib/client";
+import CodeHighlight from "@/components/highlight";
 import {PortableText} from '@portabletext/react'
-import CodeHighlight from '@/components/highlight';
-import 'highlight.js/styles/monokai-sublime.css';
-import {getTags,getPost} from "@/components/lib/interface";
+import { getLiftPost} from "@/components/lib/interface";
+
 
 
 interface Params {
@@ -15,40 +14,15 @@ interface Params {
 }
 
 
-/*
-async function getBooks(id: string) {
-    const query = `
-    *[_type == 'book' && article_id== '${id}'] | order(_createdAt desc) [0...20]{
-    nickname,
-    _updatedAt,
-    content
-    }
-    `
-    return await client.fetch(query);
-}
-*/
-
-
-
-
-
-export const revalidate = 60;
-
 const PageComponent = async ({params}: Params) => {
-    // console.log(params, "parmas");
 
-    const post = await getPost(params?.slug);
-    const tags = await getTags();
-
-
-    // console.log(post, "post");
-
-
+    const post = await getLiftPost(params?.slug);
 
 
 
     return (
         <>
+
             <ul className="flex space-x-2 rtl:space-x-reverse">
                 <li>
                     <Link href="/" className="text-primary hover:underline">
@@ -56,11 +30,12 @@ const PageComponent = async ({params}: Params) => {
                     </Link>
                 </li>
                 <li className="before:content-['/'] ltr:before:mr-2 rtl:before:ml-2">
-                    <Link href="/article" className="text-primary hover:underline">
-                        <span>文章</span>
+                    <Link href="/liftstyle" className="text-primary hover:underline">
+                        <span>程序人生</span>
                     </Link>
                 </li>
             </ul>
+
             <div className="grid w-full grid-cols-1 sm:grid-cols-4 gap-4 p-5">
                 <div className="panel h-full sm:col-span-3">
                     <div className="flex items-center justify-center">
@@ -68,34 +43,24 @@ const PageComponent = async ({params}: Params) => {
                     </div>
                     <div className="flex items-center justify-center">
                         <div className="my-4 ">
-                            <img
 
-                                src={urlFor(post.coverImage).url()}
+                            <img
+                                src={post.coverImage}
                                 alt={post.title}
                                 className="w-4/5 border border-gray-100 dark:border-zinc-600 dark:bg-zinc-700 mx-auto p-1 rounded"></img>
+
                         </div>
                     </div>
 
                     <div className="grid grid-cols-12 m-4">
-                        <div className="col-span-4">
-                            <div className="text-center">
-                                <h6 className="mb-2 text-gray-700 dark:text-gray-100">标签</h6>
-                                <p className="text-gray-500  text-15 mb-3  flex  justify-center gap-2 m-3 dark:text-white-dark">
-                                    {post?.tags.map((item: any, index: number) => (
-                                        <Link href={"/article/tag-list?tag=" + item.currentSlug} key={index}>
-                                            <span>{item.name}</span>
-                                        </Link>
-                                    ))}
-                                </p>
-                            </div>
-                        </div>
-                        <div className="col-span-4">
+
+                        <div className="col-span-6">
                             <div className="text-center">
                                 <h6 className="mb-2 text-gray-700 dark:text-gray-100">日期</h6>
                                 <p className="text-gray-500  text-15 mb-3 dark:text-white-dark">{new Date(post._createdAt).toLocaleString()}</p>
                             </div>
                         </div>
-                        <div className="col-span-4">
+                        <div className="col-span-6">
                             <div className="text-center">
                                 <p className="text-gray-500 dark:text-zinc-100 mb-2">作者</p>
                                 <h5 className="text-15 mb-3 text-gray-500 dark:text-white-dark">前端达人</h5>
@@ -122,23 +87,6 @@ const PageComponent = async ({params}: Params) => {
                 </div>
                 <div className="panel h-full sm:col-span-1 flex flex-col items-center">
 
-                    <div className="flex  justify-start w-full py-4">
-                        <h1 className="text-[16px] dark:text-white-light">热门标签</h1>
-                    </div>
-
-                    <div className="flex gap-4 w-full">
-                        {
-                            tags.map((item: any, index: number) => (
-                                <Link href={"/article/tag-list?tag=" + item.currentSlug} key={index}>
-                                <span className={
-                                    "badge " + item.colorValue
-                                } key={index}>{item.name}</span>
-                                </Link>
-                            ))
-                        }
-
-
-                    </div>
 
                     <div className="flex  justify-start w-full py-4 my-2">
                         <h1 className="text-[16px] dark:text-white-light">公众号</h1>
@@ -181,6 +129,7 @@ const PageComponent = async ({params}: Params) => {
                 </div>
 
             </div>
+
         </>
     );
 };

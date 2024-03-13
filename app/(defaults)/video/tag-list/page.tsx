@@ -1,11 +1,10 @@
 import React from 'react';
-import VideoCardComponent from "@/components/pages/viedeoCard";
-import IconCaretsDown from "@/components/icon/icon-carets-down";
-import IconCaretDown from "@/components/icon/icon-caret-down";
 import {Metadata} from "next";
-import {getVideoList} from "@/components/lib/interface";
-import {urlFor} from "@/components/lib/client";
+import {getVideoTagList} from "@/components/lib/interface";
+import VideoCardComponent from "@/components/pages/viedeoCard";
 import Pagination from "@/components/pages/pagination";
+import Link from "next/link";
+
 
 export const metadata: Metadata = {
     title: '视频',
@@ -13,16 +12,16 @@ export const metadata: Metadata = {
 
 export const revalidate = 60;
 
-const PageComponent = async ({searchParams}: any) => {
-
+const tagPage =async ({searchParams}:any) => {
 
     let page = parseInt(searchParams.page, 10);
+    let tag:string = searchParams.tag;
 
     page = !page || page < 1 ? 1 : page;
 
     const perPage: number = 12;
 
-    const {data, count} = await getVideoList((page - 1) * perPage, (page - 1) * perPage + perPage);
+    const {data, count} = await getVideoTagList((page - 1) * perPage, (page - 1) * perPage + perPage,tag);
 
     const totalPages = Math.ceil(count / perPage);
 
@@ -43,8 +42,31 @@ const PageComponent = async ({searchParams}: any) => {
     console.log(data, count);
 
 
+
     return (
         <>
+            <ul className="flex space-x-2 rtl:space-x-reverse">
+                <li>
+                    <Link href="/" className="text-primary hover:underline">
+                        首页
+                    </Link>
+                </li>
+                <li className="before:content-['/'] ltr:before:mr-2 rtl:before:ml-2">
+                    <Link href="/video" className="text-primary hover:underline">
+                        视频
+                    </Link>
+                </li>
+                <li className="before:content-['/'] ltr:before:mr-2 rtl:before:ml-2">
+                    <Link href="#" className="text-primary hover:underline">
+                        标签
+                    </Link>
+                </li>
+                <li className="before:content-['/'] ltr:before:mr-2 rtl:before:ml-2">
+                    <Link href={"/article/tag-list?tag="+searchParams.tag} className="text-primary hover:underline">
+                        <span>{searchParams.tag}</span>
+                    </Link>
+                </li>
+            </ul>
             <div className="w-full  pt-5">
                 <div className="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
                     {
@@ -74,12 +96,11 @@ const PageComponent = async ({searchParams}: any) => {
                     prevPage={prevPage}
                     pageNumbers={pageNumbers}
                     nextPage={nextPage}
-                    tagPath={null}
+                    tagPath={searchParams.tag}
                 />
             </div>
         </>
-
     );
 };
 
-export default PageComponent;
+export default tagPage;

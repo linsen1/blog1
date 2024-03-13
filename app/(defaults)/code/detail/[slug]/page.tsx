@@ -1,11 +1,10 @@
-import React, {FormEvent} from 'react';
-import {client, urlFor} from "@/components/lib/client";
-import Image from "next/image";
+import React from 'react';
 import Link from "next/link";
+import {urlFor} from "@/components/lib/client";
+import CodeHighlight from "@/components/highlight";
 import {PortableText} from '@portabletext/react'
-import CodeHighlight from '@/components/highlight';
-import 'highlight.js/styles/monokai-sublime.css';
-import {getTags,getPost} from "@/components/lib/interface";
+import {getCodePost, getTags} from "@/components/lib/interface";
+
 
 
 interface Params {
@@ -15,40 +14,15 @@ interface Params {
 }
 
 
-/*
-async function getBooks(id: string) {
-    const query = `
-    *[_type == 'book' && article_id== '${id}'] | order(_createdAt desc) [0...20]{
-    nickname,
-    _updatedAt,
-    content
-    }
-    `
-    return await client.fetch(query);
-}
-*/
-
-
-
-
-
-export const revalidate = 60;
-
 const PageComponent = async ({params}: Params) => {
-    // console.log(params, "parmas");
 
-    const post = await getPost(params?.slug);
+    const post = await getCodePost(params?.slug);
+
     const tags = await getTags();
-
-
-    // console.log(post, "post");
-
-
-
-
 
     return (
         <>
+
             <ul className="flex space-x-2 rtl:space-x-reverse">
                 <li>
                     <Link href="/" className="text-primary hover:underline">
@@ -56,11 +30,12 @@ const PageComponent = async ({params}: Params) => {
                     </Link>
                 </li>
                 <li className="before:content-['/'] ltr:before:mr-2 rtl:before:ml-2">
-                    <Link href="/article" className="text-primary hover:underline">
-                        <span>文章</span>
+                    <Link href="/code" className="text-primary hover:underline">
+                        <span>常用代码</span>
                     </Link>
                 </li>
             </ul>
+
             <div className="grid w-full grid-cols-1 sm:grid-cols-4 gap-4 p-5">
                 <div className="panel h-full sm:col-span-3">
                     <div className="flex items-center justify-center">
@@ -68,11 +43,13 @@ const PageComponent = async ({params}: Params) => {
                     </div>
                     <div className="flex items-center justify-center">
                         <div className="my-4 ">
+
                             <img
 
-                                src={urlFor(post.coverImage).url()}
+                                src={post.coverImage}
                                 alt={post.title}
                                 className="w-4/5 border border-gray-100 dark:border-zinc-600 dark:bg-zinc-700 mx-auto p-1 rounded"></img>
+
                         </div>
                     </div>
 
@@ -82,7 +59,7 @@ const PageComponent = async ({params}: Params) => {
                                 <h6 className="mb-2 text-gray-700 dark:text-gray-100">标签</h6>
                                 <p className="text-gray-500  text-15 mb-3  flex  justify-center gap-2 m-3 dark:text-white-dark">
                                     {post?.tags.map((item: any, index: number) => (
-                                        <Link href={"/article/tag-list?tag=" + item.currentSlug} key={index}>
+                                        <Link href={"/code/tag-list?tag=" + item.currentSlug} key={index}>
                                             <span>{item.name}</span>
                                         </Link>
                                     ))}
@@ -129,7 +106,7 @@ const PageComponent = async ({params}: Params) => {
                     <div className="flex gap-4 w-full">
                         {
                             tags.map((item: any, index: number) => (
-                                <Link href={"/article/tag-list?tag=" + item.currentSlug} key={index}>
+                                <Link href={"/code/tag-list?tag=" + item.currentSlug} key={index}>
                                 <span className={
                                     "badge " + item.colorValue
                                 } key={index}>{item.name}</span>
@@ -181,6 +158,7 @@ const PageComponent = async ({params}: Params) => {
                 </div>
 
             </div>
+
         </>
     );
 };
