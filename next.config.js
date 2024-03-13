@@ -6,6 +6,11 @@ const nextConfig = {
                 protocol:'https',
                 hostname:'cdn.sanity.io',
                 port:''
+            },
+            {
+                protocol:'https',
+                hostname:'darenfile-1252522393.cos.ap-nanjing.myqcloud.com',
+                port:''
             }
         ]
     },

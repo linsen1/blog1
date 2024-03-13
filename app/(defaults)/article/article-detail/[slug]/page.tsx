@@ -5,6 +5,7 @@ import Link from "next/link";
 import {PortableText} from '@portabletext/react'
 import CodeHighlight from '@/components/highlight';
 import 'highlight.js/styles/monokai-sublime.css';
+import {getTags} from "@/components/lib/interface";
 
 
 interface Params {
@@ -51,31 +52,19 @@ async function getPost(slug: string) {
 
 }
 
-async function getTags() {
-    const query = `
-     *[_type=='tag'] {
-     name,
-     "currentSlug":slug.current,
-     color,
-     colorValue
-     }
-    `;
 
-    return await client.fetch(query);
-
-}
 
 
 export const revalidate = 60;
 
 const PageComponent = async ({params}: Params) => {
-    console.log(params, "parmas");
+    // console.log(params, "parmas");
 
     const post = await getPost(params?.slug);
     const tags = await getTags();
 
 
-    console.log(post, "post");
+    // console.log(post, "post");
 
 
 
@@ -146,8 +135,6 @@ const PageComponent = async ({params}: Params) => {
                                 components={myPortableTextComponents}
                             />
                         </div>
-
-
 
                     </div>
 

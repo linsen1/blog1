@@ -81,7 +81,7 @@ const Article =async ({searchParams}:any) => {
                 {
                     data.map((item:any,index:number)=>(
                         <ArticleCard
-                                     key={index}
+                                     key={item._id}
                                      url={urlFor(item.coverImage).url()} alt='js'
                                      data={item._createdAt}
                                      title={item.title}

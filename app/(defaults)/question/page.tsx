@@ -2,88 +2,65 @@ import React from 'react';
 import IconCaretsDown from "@/components/icon/icon-carets-down";
 import IconCaretDown from "@/components/icon/icon-caret-down";
 import {Metadata} from "next";
+import QuestionCardComponent from "@/components/pages/questionCard";
+import {getQuestionList} from "@/components/lib/interface";
+import Pagination from "@/components/pages/pagination";
 
 export const metadata: Metadata = {
     title: '面试题',
 };
-const PageComponent = () => {
+export const revalidate = 60;
+
+const PageComponent = async ({searchParams}: any) => {
+
+
+    let page = parseInt(searchParams.page, 10);
+
+    page = !page || page < 1 ? 1 : page;
+
+    const perPage: number = 12;
+
+    const {data, count} = await getQuestionList((page - 1) * perPage, (page - 1) * perPage + perPage);
+
+
+
+    const totalPages = Math.ceil(count / perPage);
+
+    const prevPage = page - 1 > 0 ? page - 1 : 1;
+
+    const nextPage = page + 1;
+
+    const isPageOutOfRange = page > totalPages;
+
+    const pageNumbers = [];
+    const offsetNumber = 3;
+    for (let i = page - offsetNumber; i <= page + offsetNumber; i++) {
+        if (i >= 1 && i <= totalPages) {
+            pageNumbers.push(i);
+        }
+    }
+
+    console.log(data, count);
+
+
+
     return (
         <>
             <div className="w-full  pt-5">
 
                 <div className="grid grid-cols-1 sm:grid-cols-3  w-full justify-center mb-5 gap-6">
 
-                    <div className="border border-gray-500/20 rounded-md shadow-[rgb(31_45_61_/_10%)_0px_2px_10px_1px] dark:shadow-[0_2px_11px_0_rgb(6_8_24_/_39%)] p-6 pt-12 mt-8 relative">
-                        <div className="bg-primary absolute text-white-light ltr:left-6 rtl:right-6 -top-8 w-16 h-16 rounded-md flex items-center justify-center mb-5 mx-auto">
-                            <span className="text-2xl">js</span>
-                        </div>
-                        <h5 className="text-dark text-lg font-semibold mb-3.5 dark:text-white-light">实现一个快速排序算法</h5>
-                        <p className="text-white-dark text-[15px]  mb-3.5">一个常见的面试题</p>
-                        <button type="button" className="text-primary font-semibold hover:underline group">
-                            Discover
-                        </button>
-                    </div>
-
-
-
-                    <div className="border border-gray-500/20 rounded-md shadow-[rgb(31_45_61_/_10%)_0px_2px_10px_1px] dark:shadow-[0_2px_11px_0_rgb(6_8_24_/_39%)] p-6 pt-12 mt-8 relative">
-                        <div className="bg-primary absolute text-white-light ltr:left-6 rtl:right-6 -top-8 w-16 h-16 rounded-md flex items-center justify-center mb-5 mx-auto">
-                            <span className="text-2xl">js</span>
-                        </div>
-                        <h5 className="text-dark text-lg font-semibold mb-3.5 dark:text-white-light">实现一个快速排序算法</h5>
-                        <p className="text-white-dark text-[15px]  mb-3.5">一个常见的面试题</p>
-                        <button type="button" className="text-primary font-semibold hover:underline group">
-                            Discover
-                        </button>
-                    </div>
-
-
-                    <div className="border border-gray-500/20 rounded-md shadow-[rgb(31_45_61_/_10%)_0px_2px_10px_1px] dark:shadow-[0_2px_11px_0_rgb(6_8_24_/_39%)] p-6 pt-12 mt-8 relative">
-                        <div className="bg-primary absolute text-white-light ltr:left-6 rtl:right-6 -top-8 w-16 h-16 rounded-md flex items-center justify-center mb-5 mx-auto">
-                            <span className="text-2xl">js</span>
-                        </div>
-                        <h5 className="text-dark text-lg font-semibold mb-3.5 dark:text-white-light">实现一个快速排序算法</h5>
-                        <p className="text-white-dark text-[15px]  mb-3.5">一个常见的面试题</p>
-                        <button type="button" className="text-primary font-semibold hover:underline group">
-                            Discover
-                        </button>
-                    </div>
-
-                    <div className="border border-gray-500/20 rounded-md shadow-[rgb(31_45_61_/_10%)_0px_2px_10px_1px] dark:shadow-[0_2px_11px_0_rgb(6_8_24_/_39%)] p-6 pt-12 mt-8 relative">
-                        <div className="bg-primary absolute text-white-light ltr:left-6 rtl:right-6 -top-8 w-16 h-16 rounded-md flex items-center justify-center mb-5 mx-auto">
-                            <span className="text-2xl">js</span>
-                        </div>
-                        <h5 className="text-dark text-lg font-semibold mb-3.5 dark:text-white-light">实现一个快速排序算法</h5>
-                        <p className="text-white-dark text-[15px]  mb-3.5">一个常见的面试题</p>
-                        <button type="button" className="text-primary font-semibold hover:underline group">
-                            Discover
-                        </button>
-                    </div>
-
-
-
-                    <div className="border border-gray-500/20 rounded-md shadow-[rgb(31_45_61_/_10%)_0px_2px_10px_1px] dark:shadow-[0_2px_11px_0_rgb(6_8_24_/_39%)] p-6 pt-12 mt-8 relative">
-                        <div className="bg-primary absolute text-white-light ltr:left-6 rtl:right-6 -top-8 w-16 h-16 rounded-md flex items-center justify-center mb-5 mx-auto">
-                            <span className="text-2xl">js</span>
-                        </div>
-                        <h5 className="text-dark text-lg font-semibold mb-3.5 dark:text-white-light">实现一个快速排序算法</h5>
-                        <p className="text-white-dark text-[15px]  mb-3.5">一个常见的面试题</p>
-                        <button type="button" className="text-primary font-semibold hover:underline group">
-                            Discover
-                        </button>
-                    </div>
-
-
-                    <div className="border border-gray-500/20 rounded-md shadow-[rgb(31_45_61_/_10%)_0px_2px_10px_1px] dark:shadow-[0_2px_11px_0_rgb(6_8_24_/_39%)] p-6 pt-12 mt-8 relative">
-                        <div className="bg-primary absolute text-white-light ltr:left-6 rtl:right-6 -top-8 w-16 h-16 rounded-md flex items-center justify-center mb-5 mx-auto">
-                            <span className="text-2xl">js</span>
-                        </div>
-                        <h5 className="text-dark text-lg font-semibold mb-3.5 dark:text-white-light">实现一个快速排序算法</h5>
-                        <p className="text-white-dark text-[15px]  mb-3.5">一个常见的面试题</p>
-                        <button type="button" className="text-primary font-semibold hover:underline group">
-                            Discover
-                        </button>
-                    </div>
+                    {
+                        data.map((item:any,index:number)=>(
+                            <QuestionCardComponent
+                                key={index}
+                                classType={item.classType}
+                                title={item.title}
+                                content={item.smallDescription}
+                                slug={item.currentSlug}
+                            />
+                        ))
+                    }
 
 
 
@@ -94,61 +71,14 @@ const PageComponent = () => {
 
             <div className="max-w-full my-10">
                 <div className="flex w-full flex-col justify-center">
-                    <ul className="inline-flex items-center space-x-1 rtl:space-x-reverse m-auto mb-4">
-                        <li>
-                            <button
-                                type="button"
-                                className="flex justify-center font-semibold p-2 rounded-full transition bg-white-light text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary"
-                            >
-                                <IconCaretsDown className="rotate-90 rtl:-rotate-90"/>
-                            </button>
-                        </li>
-                        <li>
-                            <button
-                                type="button"
-                                className="flex justify-center font-semibold p-2 rounded-full transition bg-white-light text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary"
-                            >
-                                <IconCaretDown className="h-5 w-5 rotate-90 rtl:-rotate-90"/>
-                            </button>
-                        </li>
-                        <li>
-                            <button
-                                type="button"
-                                className="flex justify-center font-semibold px-3.5 py-2 rounded-full transition bg-white-light text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary"
-                            >
-                                1
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button" className="flex justify-center font-semibold px-3.5 py-2 rounded-full transition bg-primary text-white dark:text-white-light dark:bg-primary">
-                                2
-                            </button>
-                        </li>
-                        <li>
-                            <button
-                                type="button"
-                                className="flex justify-center font-semibold px-3.5 py-2 rounded-full transition bg-white-light text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary"
-                            >
-                                3
-                            </button>
-                        </li>
-                        <li>
-                            <button
-                                type="button"
-                                className="flex justify-center font-semibold p-2 rounded-full transition bg-white-light text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary"
-                            >
-                                <IconCaretDown className="h-5 w-5 -rotate-90 rtl:rotate-90"/>
-                            </button>
-                        </li>
-                        <li>
-                            <button
-                                type="button"
-                                className="flex justify-center font-semibold p-2 rounded-full transition bg-white-light text-dark hover:text-white hover:bg-primary dark:text-white-light dark:bg-[#191e3a] dark:hover:bg-primary"
-                            >
-                                <IconCaretsDown className="-rotate-90 rtl:rotate-90"/>
-                            </button>
-                        </li>
-                    </ul>
+                    <Pagination
+                        isPageOutOfRange={isPageOutOfRange}
+                        page={page}
+                        prevPage={prevPage}
+                        pageNumbers={pageNumbers}
+                        nextPage={nextPage}
+                        tagPath={null}
+                    />
                 </div>
             </div>
         </>
