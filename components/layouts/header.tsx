@@ -212,13 +212,13 @@ const Header = () => {
 
                     </li>
                     <li className="menu nav-item relative">
-                        <button type="button" className="nav-link">
+                        <Link href="/contact" className="nav-link">
                             <div className="flex items-center">
                                 <IconMail  className="shrink-0"/>
                                 <span className="px-1">与我联系</span>
                             </div>
 
-                        </button>
+                        </Link>
 
                     </li>
                 </ul>

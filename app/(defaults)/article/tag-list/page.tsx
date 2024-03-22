@@ -56,7 +56,7 @@ const tagPage = async ({searchParams}:any) => {
 
     page = !page || page < 1 ? 1 : page;
 
-    const perPage:number = 3;
+    const perPage:number = 12;
 
     const {data,count}= await getData((page-1)*perPage,(page-1)*perPage+perPage,tag);
 

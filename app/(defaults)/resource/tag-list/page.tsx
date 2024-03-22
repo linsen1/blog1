@@ -17,7 +17,7 @@ const PageComponent = async ({searchParams}:any) => {
 
     page = !page || page < 1 ? 1 : page;
 
-    const perPage:number = 4;
+    const perPage:number = 12;
 
     const {data,count} = await getResourceTagList((page-1)*perPage,(page-1)*perPage+perPage,tag);
 

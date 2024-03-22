@@ -7,9 +7,13 @@ import Pagination from "@/components/pages/pagination";
 import {client,urlFor} from "@/components/lib/client";
 import {simpleArticle} from "@/components/lib/interface";
 
+
+
+
 export const metadata: Metadata = {
     title: '文章',
 };
+
 
 async function getData(start:number,end:number) {
     const query = `
@@ -49,7 +53,7 @@ const Article =async ({searchParams}:any) => {
 
     page = !page || page < 1 ? 1 : page;
 
-    const perPage:number = 4;
+    const perPage:number = 12;
 
     const {data,count} = await getData((page-1)*perPage,(page-1)*perPage+perPage);
 
