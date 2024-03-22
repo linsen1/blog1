@@ -21,7 +21,7 @@ const nunito = Nunito({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
 
-        <html lang="en">
+        <html lang="zh-cn">
             <body className={nunito.variable}>
                 <ProviderComponent>{children}</ProviderComponent>
             </body>
