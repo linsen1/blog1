@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 
 
@@ -14,26 +16,22 @@ const FootLink = () => {
             <div className=" grid grid-cols-1 h-auto">
                 <h5 className="mb-3 text-lg font-semibold dark:text-white-light">友情链接</h5>
                 <p className="lead text-[16px]  mb-2 dark:text-white-light">
-                    swiftui.cc
+                    <a href='https://swiftui.cc' target="_blank">
+                    swiftui学习笔记
+                    </a>
                 </p>
-                <p className="lead text-[16px] mb-2  dark:text-white-light">
-                    react.wiki
-                </p>
-                <p className="lead text-[16px]   mb-2 dark:text-white-light">
-                    vuejs.wiki
-                </p>
+
             </div>
             <div className="grid grid-cols-1 h-auto">
                 <h5 className="mb-3 text-lg font-semibold dark:text-white-light">关于本站</h5>
+
+                <Link href="/contact">
                 <p className="lead text-[14px]   mb-2 dark:text-white-light">
-                    站点介绍
-                </p>
-                <p className="lead text-[14px]   mb-2 dark:text-white-light">
+
                     商务合作
                 </p>
-                <p className="lead text-[14px]   mb-2 dark:text-white-light">
-                    网站地图
-                </p>
+                </Link>
+
             </div>
             <div className=" grid grid-cols-1 h-auto">
                 <h5 className="mb-3 text-lg font-semibold dark:text-white-light">公众号</h5>

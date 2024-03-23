@@ -105,7 +105,7 @@ const tagPage = async ({searchParams}:any) => {
                 </li>
             </ul>
 
-            <div className="max-w-full grid grid-cols-1 gap-6 pt-5 place-items-center sm:grid-cols-2 lg:grid-cols-3">
+            <div className="max-w-full grid grid-cols-1 gap-6  place-items-center sm:grid-cols-2 lg:grid-cols-3">
 
                 {
                     data.map((item:any,index:number)=>(
