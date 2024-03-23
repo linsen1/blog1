@@ -33,7 +33,9 @@ function App({ children }: PropsWithChildren) {
             } main-section relative font-nunito text-sm font-normal antialiased`}
         >
             {isLoading ? <Loading /> : children}
+
         </div>
+
     );
 }
 
