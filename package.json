@@ -10,6 +10,7 @@
     },
     "dependencies": {
         "@clerk/nextjs": "^4.29.9",
+        "@ctrl/react-adsense": "^1.7.0",
         "@emotion/react": "^11.10.6",
         "@headlessui/react": "^1.7.8",
         "@portabletext/react": "^3.0.11",

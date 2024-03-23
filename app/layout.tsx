@@ -3,6 +3,8 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import '../styles/tailwind.css';
 import { Metadata } from 'next';
 import { Nunito } from 'next/font/google';
+import Script from "next/script";
+
 
 
 export const metadata: Metadata = {
@@ -24,7 +26,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="zh-cn">
             <body className={nunito.variable}>
                 <ProviderComponent>{children}</ProviderComponent>
+                <Script
+                    async
+                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9337558103292164"
+                    crossOrigin="anonymous"
+                    strategy="afterInteractive"
+
+                />
             </body>
+
+
+
+
         </html>
 
     );
