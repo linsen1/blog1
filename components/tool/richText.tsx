@@ -3,6 +3,10 @@ import {PortableTextComponents} from "@portabletext/react";
 import {urlFor} from "@/components/lib/client";
 import CodeHighlight from "@/components/highlight";
 import IconArrowLeft from "@/components/icon/icon-arrow-left";
+import {Prism, SyntaxHighlighterProps }from 'react-syntax-highlighter';
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
+const SyntaxHighlighter = (Prism as any) as React.FC<SyntaxHighlighterProps>;
 
 
 export const myPortableTextComponents:PortableTextComponents = {
@@ -15,12 +19,16 @@ export const myPortableTextComponents:PortableTextComponents = {
             />
         ),
         code: ({value}: any) => (
-            <div className='my-2 mb-6'>
-                <CodeHighlight>
-                    <pre>
+            <div className='my-2 mb-6 '>
+                <SyntaxHighlighter
+                    language="javascript"
+                    style={oneDark}
+                    wrapLongLines={true}
+                >
+
                       {value.code}
-                    </pre>
-                </CodeHighlight>
+
+                </SyntaxHighlighter>
 
             </div>
         )
