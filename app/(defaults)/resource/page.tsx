@@ -9,6 +9,8 @@ export const metadata: Metadata = {
     title: '资源与工具',
 };
 
+export const revalidate = 60;
+
 const PageComponent = async ({searchParams}:any) => {
 
     let page = parseInt(searchParams.page, 10);

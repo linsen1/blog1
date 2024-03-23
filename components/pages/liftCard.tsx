@@ -19,7 +19,7 @@ const LiftCardComponent:React.FC<LifeCardProps> = ({...pros}) => {
     return (
         <div>
             <div
-                className="space-y-5 rounded-md border border-white-light bg-white p-5 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20),0px_12px_24px_-4px_rgba(145,158,171,0.12)] dark:border-[#1B2E4B] dark:bg-black">
+                className="space-y-5 h-auto rounded-md border border-white-light bg-white p-5 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20),0px_12px_24px_-4px_rgba(145,158,171,0.12)] dark:border-[#1B2E4B] dark:bg-black">
                 <Link href={`/liftstyle/detail/${pros.slug}`}>
                 <div className="h-40 overflow-hidden rounded-md grid place-content-center">
                     <img src={pros.url} className="w-full object-cover" alt={pros.title}  />
@@ -27,7 +27,7 @@ const LiftCardComponent:React.FC<LifeCardProps> = ({...pros}) => {
                 </Link>
 
                 <Link href={`/liftstyle/detail/${pros.slug}`}>
-                <h5 className="text-xl my-2  dark:text-white">
+                <h5 className="text-xl my-4  dark:text-white">
                     {pros.title}
                 </h5>
                 </Link>
@@ -37,7 +37,7 @@ const LiftCardComponent:React.FC<LifeCardProps> = ({...pros}) => {
                     </div>
                     <div className="flex-1">
                         <h4 className="mb-1.5 font-semibold dark:text-white">{pros.author}</h4>
-                        <p>{new Date(pros.date).toLocaleString()}</p>
+                        <p>{new Date(pros.date).toLocaleDateString("zh-cn")}</p>
                     </div>
                 </div>
             </div>

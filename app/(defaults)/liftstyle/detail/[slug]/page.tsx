@@ -2,9 +2,10 @@ import React from 'react';
 import Link from "next/link";
 import {urlFor} from "@/components/lib/client";
 import CodeHighlight from "@/components/highlight";
-import {PortableText} from '@portabletext/react'
+import {PortableText, PortableTextComponents} from '@portabletext/react'
 import { getLiftPost} from "@/components/lib/interface";
 import RightInfoComponent from "@/components/pages/rightInfo";
+import {richTextStyles, myPortableTextComponents} from "@/components/tool/richText";
 
 
 
@@ -14,6 +15,7 @@ interface Params {
     }
 }
 
+export const revalidate = 60;
 
 const PageComponent = async ({params}: Params) => {
 
@@ -21,10 +23,11 @@ const PageComponent = async ({params}: Params) => {
 
 
 
+
     return (
         <>
 
-            <ul className="flex space-x-2 rtl:space-x-reverse">
+            <ul className="flex space-x-2 rtl:space-x-reverse mb-4">
                 <li>
                     <Link href="/" className="text-primary hover:underline">
                         首页
@@ -37,7 +40,7 @@ const PageComponent = async ({params}: Params) => {
                 </li>
             </ul>
 
-            <div className="grid w-full grid-cols-1 sm:grid-cols-4 gap-4 p-5">
+            <div className="grid w-full grid-cols-1 sm:grid-cols-4 gap-4 ">
                 <div className="panel h-full sm:col-span-3">
                     <div className="flex items-center justify-center">
                         <h1 className="m-4 text-4xl dark:text-white-light">{post.title}</h1>
@@ -48,7 +51,7 @@ const PageComponent = async ({params}: Params) => {
                             <img
                                 src={post.coverImage}
                                 alt={post.title}
-                                className="w-4/5 border border-gray-100 dark:border-zinc-600 dark:bg-zinc-700 mx-auto p-1 rounded"></img>
+                                className="w-[95%] h-auto border border-gray-100 dark:border-zinc-600 dark:bg-zinc-700 object-cover p-1 rounded"></img>
 
                         </div>
                     </div>
@@ -58,7 +61,7 @@ const PageComponent = async ({params}: Params) => {
                         <div className="col-span-6">
                             <div className="text-center">
                                 <h6 className="mb-2 text-gray-700 dark:text-gray-100">日期</h6>
-                                <p className="text-gray-500  text-15 mb-3 dark:text-white-dark">{new Date(post._createdAt).toLocaleString()}</p>
+                                <p className="text-gray-500  text-15 mb-3 dark:text-white-dark">{new Date(post._createdAt).toLocaleDateString("zh-cn")}</p>
                             </div>
                         </div>
                         <div className="col-span-6">
@@ -102,42 +105,5 @@ const PageComponent = async ({params}: Params) => {
 export default PageComponent;
 
 
-const myPortableTextComponents = {
-    types: {
-        image: ({value}: any) => (
-            <img
-                src={urlFor(value).url()}
-                alt="Post"
-                className='m-10 w-fit h-[300px] object-cover border border-gray-100 dark:border-zinc-600 dark:bg-zinc-700 mx-auto p-1 rounded'
-            />
-        ),
-        code: ({value}: any) => (
-            <div className='my-2 mb-6'>
-                <CodeHighlight>
-                    <pre className="language-xml">
-                      {value.code}
-                    </pre>
-                </CodeHighlight>
 
-            </div>
-        )
-    },
-};
 
-const richTextStyles = `
-mt-8
-text-justify
-px-4
-w-full
-m-auto
-text-lg
-prose-headings:my-5
-prose-heading:text-2xl
-prose-p:mb-5
-prose-p:leading-7
-prose-li:list-disc
-prose-li:leading-7
-prose-li:ml-4
-dark:text-white-light,
-
-`;

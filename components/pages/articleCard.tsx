@@ -23,7 +23,7 @@ const ArticleCard = ({key,url,alt,data,title,content,author,avatar,slug,tags}:Ar
     return (
        <>
 
-               <div className="w-full max-w-[22rem] rounded-md border border-white-light bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none">
+               <div className="w-full  rounded-md border border-white-light bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none">
                    <div className="px-6 py-7">
                        <div className="-mx-6 -mt-7 mb-7 h-[200px] overflow-hidden rounded-tl-md rounded-tr-md relative ">
 

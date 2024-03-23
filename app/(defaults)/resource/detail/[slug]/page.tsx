@@ -14,6 +14,7 @@ interface Params {
     }
 }
 
+export const revalidate = 60;
 
 const PageComponent = async ({params}: Params) => {
 

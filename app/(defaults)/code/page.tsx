@@ -9,6 +9,9 @@ import Pagination from "@/components/pages/pagination";
 export const metadata: Metadata = {
     title: '代码',
 };
+
+export const revalidate = 60;
+
 const PageComponent = async ({searchParams}:any) => {
 
     let page = parseInt(searchParams.page, 10);

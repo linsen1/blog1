@@ -461,6 +461,7 @@ export async function getCodeTagList(start: number, end: number, current: string
    references(*[_type == "tag" && slug.current =="${current}"]._id)][${start}...${end}]{
  _id,
 title,
+  classType,
 "coverImage":coverImage_cn,
   smallDescription,
   _createdAt,
