@@ -46,13 +46,11 @@ const PageComponent = async ({params}: Params) => {
                         <h1 className="m-4 text-4xl dark:text-white-light">{post.title}</h1>
                     </div>
                     <div className="flex items-center justify-center">
-                        <div className="my-4 ">
-
+                        <div className="my-4 grid place-items-center">
                             <img
                                 src={post.coverImage}
                                 alt={post.title}
                                 className="w-[95%] h-auto border border-gray-100 dark:border-zinc-600 dark:bg-zinc-700 object-cover p-1 rounded"></img>
-
                         </div>
                     </div>
 
