@@ -28,7 +28,7 @@ const PageComponent = async ({params}: Params) => {
 
     return (
       <>
-          <ul className="flex space-x-2 rtl:space-x-reverse">
+          <ul className="flex space-x-2 rtl:space-x-reverse py-4">
               <li>
                   <Link href="/" className="text-primary hover:underline">
                       首页
@@ -41,7 +41,7 @@ const PageComponent = async ({params}: Params) => {
               </li>
           </ul>
 
-          <div className="grid w-full grid-cols-1 sm:grid-cols-4 gap-4 p-5">
+          <div className="grid w-full grid-cols-1 sm:grid-cols-4 gap-4">
               <div className="panel h-full sm:col-span-3">
                   <div className="flex items-center justify-center">
                       <h1 className="m-4 text-4xl dark:text-white-light">{post.title}</h1>
