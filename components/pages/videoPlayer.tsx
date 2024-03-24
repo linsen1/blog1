@@ -2,6 +2,7 @@
 import React from 'react';
 import { default as _ReactPlayer } from 'react-player/lazy';
 import { ReactPlayerProps } from "react-player/types/lib";
+import {auto} from "@popperjs/core";
 const ReactPlayer = _ReactPlayer as unknown as React.FC<ReactPlayerProps>;
 
 interface VideoPlayerProps{
@@ -13,13 +14,14 @@ const VideoPlayer = ({url,img}:VideoPlayerProps) => {
 
     return (
      <>
-         <div>
+
              <ReactPlayer
                  url={url}
                  controls={true}
                  light = {img}
+
              />
-         </div>
+
 
      </>
     );

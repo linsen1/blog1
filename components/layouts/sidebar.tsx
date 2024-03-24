@@ -33,6 +33,13 @@ import IconMenuAuthentication from '@/components/icon/menu/icon-menu-authenticat
 import IconMenuDocumentation from '@/components/icon/menu/icon-menu-documentation';
 import { usePathname } from 'next/navigation';
 import { getTranslation } from '@/i18n';
+import IconHome from "@/components/icon/icon-home";
+import IconBook from "@/components/icon/icon-book";
+import IconVideo from "@/components/icon/icon-video";
+import IconPencil from "@/components/icon/icon-pencil";
+import IconCoffee from "@/components/icon/icon-coffee";
+import IconMail from "@/components/icon/icon-mail";
+import IconCode from "@/components/icon/icon-code";
 
 const Sidebar = () => {
     const dispatch = useDispatch();
@@ -90,8 +97,8 @@ const Sidebar = () => {
                 <div className="h-full bg-white dark:bg-black">
                     <div className="flex items-center justify-between px-4 py-3">
                         <Link href="/" className="main-logo flex shrink-0 items-center">
-                            <img className="ml-[5px] w-8 flex-none" src="/assets/images/logo.svg" alt="logo" />
-                            <span className="align-middle text-2xl font-semibold ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light lg:inline">VRISTO</span>
+                            <img className="ml-[5px] w-10 flex-none border border-gray-500  rounded-full" src="/assets/images/logo.png" alt="logo" />
+                            <span className="align-middle text-xl  ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light lg:inline">前端达人</span>
                         </Link>
 
                         <button
@@ -103,44 +110,85 @@ const Sidebar = () => {
                         </button>
                     </div>
 
-                  {/*  <ul className="relative space-y-0.5 p-4 py-0 font-semibold">
-                        <li className="menu nav-item">
-                            <button type="button" className={`${currentMenu === 'dashboard' ? 'active' : ''} nav-link group w-full`} onClick={() => toggleMenu('dashboard')}>
-                                <div className="flex items-center">
-                                    <IconMenuDashboard className="shrink-0 group-hover:!text-primary" />
-                                    <span className="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">dashboard</span>
-                                </div>
+                   <ul className="relative space-y-0.5 p-4 py-0 font-semibold">
 
-                                <div className={currentMenu !== 'dashboard' ? '-rotate-90 rtl:rotate-90' : ''}>
-                                    <IconCaretDown />
-                                </div>
-                            </button>
+                       <li className="nav-item">
+                           <ul>
+                               <li className="nav-item">
+                                   <Link href="/" className="group">
+                                       <div className="flex items-center">
+                                           <IconHome className="shrink-0 group-hover:!text-primary" />
+                                           <span className="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">首页</span>
+                                       </div>
+                                   </Link>
+                               </li>
+                               <li className="nav-item">
+                                   <Link href="/article" className="group">
+                                       <div className="flex items-center">
+                                           <IconBook className="shrink-0 group-hover:!text-primary" />
+                                           <span className="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">文章</span>
+                                       </div>
+                                   </Link>
+                               </li>
+                               <li className="nav-item">
+                                   <Link href="/video" className="group">
+                                       <div className="flex items-center">
+                                           <IconVideo className="shrink-0 group-hover:!text-primary" />
+                                           <span className="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">视频</span>
+                                       </div>
+                                   </Link>
+                               </li>
+                               <li className="nav-item">
+                                   <Link href="/question" className="group">
+                                       <div className="flex items-center">
+                                           <IconPencil className="shrink-0 group-hover:!text-primary" />
+                                           <span className="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">面试题</span>
+                                       </div>
+                                   </Link>
+                               </li>
+                               <li className="nav-item">
+                                   <Link href="/resource" className="group">
+                                       <div className="flex items-center">
+                                           <IconMenuDatatables className="shrink-0 group-hover:!text-primary" />
+                                           <span className="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">资源与工具</span>
+                                       </div>
+                                   </Link>
+                               </li>
+                               <li className="nav-item">
+                                   <Link href="/code" className="group">
+                                       <div className="flex items-center">
+                                           <IconCode className="shrink-0 group-hover:!text-primary" />
+                                           <span className="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">常用代码</span>
+                                       </div>
+                                   </Link>
+                               </li>
 
-                            <AnimateHeight duration={300} height={currentMenu === 'dashboard' ? 'auto' : 0}>
-                                <ul className="sub-menu text-gray-500">
-                                    <li>
-                                        <Link href="/">sales</Link>
-                                    </li>
-                                    <li>
-                                        <Link href="/analytics">1</Link>
-                                    </li>
-                                    <li>
-                                        <Link href="/finance">1</Link>
-                                    </li>
-                                    <li>
-                                        <Link href="/crypto">2</Link>
-                                    </li>
-                                </ul>
-                            </AnimateHeight>
-                        </li>
-
-                        <h2 className="-mx-4 mb-1 flex items-center bg-white-light/30 px-7 py-3 font-extrabold uppercase dark:bg-dark dark:bg-opacity-[0.08]">
-                            <IconMinus className="hidden h-5 w-4 flex-none" />
-                            <span>4</span>
-                        </h2>
 
 
-                    </ul>*/}
+                               <li className="nav-item">
+                                   <Link href="/liftstyle" className="group">
+                                       <div className="flex items-center">
+                                           <IconCoffee className="shrink-0 group-hover:!text-primary" />
+                                           <span className="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">程序人生</span>
+                                       </div>
+                                   </Link>
+                               </li>
+
+
+
+                               <li className="nav-item">
+                                   <Link href="/contact" className="group">
+                                       <div className="flex items-center">
+                                           <IconMail className="shrink-0 group-hover:!text-primary" />
+                                           <span className="text-black ltr:pl-3 rtl:pr-3 dark:text-[#506690] dark:group-hover:text-white-dark">与我联系</span>
+                                       </div>
+                                   </Link>
+                               </li>
+                           </ul>
+                       </li>
+
+
+                    </ul>
 
                 </div>
             </nav>

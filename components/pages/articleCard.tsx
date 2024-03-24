@@ -30,16 +30,12 @@ const ArticleCard = ({key,url,alt,data,title,content,author,avatar,slug,tags}:Ar
                            <Link href={`/article/article-detail/${slug}`}>
                            <Image
 
-                               loader={
-                                   ({ width, quality = 100 }) =>
-                                       urlFor(url).quality(quality).url()
-                               }
 
                                src={url} alt={alt}  fill  objectFit="cover" ></Image>
                            </Link>
 
                        </div>
-                       <p className="mb-1.5 text-xs font-bold text-primary">{new Date(data).toLocaleString()}</p>
+                       <p className="mb-1.5 text-xs font-bold text-primary">{new Date(data).toLocaleDateString("zh-cn")}</p>
                        <Link href={`/article/article-detail/${slug}`}>
                        <h5 className="mb-4 text-[18px] font-bold text-[#3b3f5c] leading-normal dark:text-white-light" >
                            {title}

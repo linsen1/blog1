@@ -4,41 +4,11 @@ import {client, urlFor} from "@/components/lib/client";
 import Link from "next/link";
 import ArticleCard from "@/components/pages/articleCard";
 import Pagination from "@/components/pages/pagination";
+import {getArticleTagList} from "@/components/lib/interface";
 
 
 
-async function getData(start:number,end:number,current:string){
-    const query = `
 
-     *[_type == "article" &&
-   references(*[_type == "tag" && slug.current =="${current}"]._id)][${start}...${end}]{
-
-title,
-  "coverImage":coverImage.asset->url,
-  smallDescription,
-  _createdAt,
-  "currentSlug":slug.current,
-  tags[]-> {
-      _id,
-       "currentSlug":slug.current,
-      name,
-      color,
-      colorValue
-    }
-
-   }
-
-    `
-
-  const queryCount = `
-  count(*[_type == "article" &&
-   references(*[_type == "tag" && slug.current == "${current}"]._id)])
-  `
-    const data = await client.fetch(query);
-    const count = await client.fetch(queryCount);
-
-    return {data,count};
-}
 
 export const metadata: Metadata = {
     title: 'tag标签-前端达人',
@@ -58,7 +28,7 @@ const tagPage = async ({searchParams}:any) => {
 
     const perPage:number = 12;
 
-    const {data,count}= await getData((page-1)*perPage,(page-1)*perPage+perPage,tag);
+    const {data,count}= await getArticleTagList((page-1)*perPage,(page-1)*perPage+perPage,tag);
 
     const totalPages = Math.ceil(count / perPage);
 
@@ -82,7 +52,7 @@ const tagPage = async ({searchParams}:any) => {
     return (
         <div>
             {/*定义面包屑导航*/}
-            <ul className="flex space-x-2 rtl:space-x-reverse">
+            <ul className="flex space-x-2 rtl:space-x-reverse py-4">
                 <li>
                     <Link href="/" className="text-primary hover:underline">
                         首页
@@ -111,7 +81,7 @@ const tagPage = async ({searchParams}:any) => {
                     data.map((item:any,index:number)=>(
                         <ArticleCard
                             key={index}
-                            url={urlFor(item.coverImage).url()} alt='js'
+                            url={item.coverImage} alt={item.title}
                             data={item._createdAt}
                             title={item.title}
                             content={item.smallDescription}

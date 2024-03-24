@@ -291,7 +291,7 @@ export async function getPost(slug: string) {
      *[_type == 'article' && slug.current == '${slug}'][0] {
      _id,
      title,
-    coverImage,
+     "coverImage":coverImage_cn,
   smallDescription,
    content,
   _createdAt,
@@ -486,4 +486,67 @@ title,
     const count = await client.fetch(queryCount);
 
     return {data, count};
+}
+
+
+export async function getArticleList(start:number,end:number) {
+    const query = `
+    *[_type=='article'] | order(_createdAt desc) [${start}...${end}]{
+  title,
+  "coverImage":coverImage_cn,
+  smallDescription,
+  _createdAt,
+  "currentSlug":slug.current,
+  tags[]-> {
+      _id,
+       "currentSlug":slug.current,
+      name,
+      color,
+      colorValue
+    }
+}
+    `
+    const queryCount:string =`
+    count(*[_type == "article"])
+    `
+    const data = await client.fetch(query);
+    const count = await client.fetch(queryCount);
+
+
+    return {data,count};
+
+}
+
+
+export async function getArticleTagList(start:number,end:number,current:string){
+    const query = `
+
+     *[_type == "article" &&
+   references(*[_type == "tag" && slug.current =="${current}"]._id)][${start}...${end}]{
+
+title,
+  "coverImage":coverImage_cn,
+  smallDescription,
+  _createdAt,
+  "currentSlug":slug.current,
+  tags[]-> {
+      _id,
+       "currentSlug":slug.current,
+      name,
+      color,
+      colorValue
+    }
+
+   }
+
+    `
+
+    const queryCount = `
+  count(*[_type == "article" &&
+   references(*[_type == "tag" && slug.current == "${current}"]._id)])
+  `
+    const data = await client.fetch(query);
+    const count = await client.fetch(queryCount);
+
+    return {data,count};
 }

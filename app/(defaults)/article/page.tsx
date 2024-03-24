@@ -1,11 +1,10 @@
 import {Metadata} from 'next';
 import React from 'react';
-import IconHeart from '@/components/icon/icon-heart';
-import IconEye from '@/components/icon/icon-eye';
+
 import ArticleCard from "@/components/pages/articleCard";
 import Pagination from "@/components/pages/pagination";
-import {client,urlFor} from "@/components/lib/client";
-import {simpleArticle} from "@/components/lib/interface";
+
+import {getArticleList, simpleArticle} from "@/components/lib/interface";
 
 
 
@@ -15,33 +14,7 @@ export const metadata: Metadata = {
 };
 
 
-async function getData(start:number,end:number) {
-    const query = `
-    *[_type=='article'] | order(_createdAt desc) [${start}...${end}]{
-  title,
-  "coverImage":coverImage.asset->url,
-  smallDescription,
-  _createdAt,
-  "currentSlug":slug.current,
-  tags[]-> {
-      _id,
-       "currentSlug":slug.current,
-      name,
-      color,
-      colorValue
-    }
-}
-    `
-    const queryCount:string =`
-    count(*[_type == "article"])
-    `
-    const data = await client.fetch(query);
-    const count = await client.fetch(queryCount);
 
-
-    return {data,count};
-
-}
 
 export const revalidate = 60;
 
@@ -55,7 +28,7 @@ const Article =async ({searchParams}:any) => {
 
     const perPage:number = 12;
 
-    const {data,count} = await getData((page-1)*perPage,(page-1)*perPage+perPage);
+    const {data,count} = await getArticleList((page-1)*perPage,(page-1)*perPage+perPage);
 
     const totalPages = Math.ceil(count / perPage);
 
@@ -86,7 +59,7 @@ const Article =async ({searchParams}:any) => {
                     data.map((item:any,index:number)=>(
                         <ArticleCard
                                      key={item._id}
-                                     url={urlFor(item.coverImage).url()} alt='js'
+                                     url={item.coverImage} alt={item.title}
                                      data={item._createdAt}
                                      title={item.title}
                                      content={item.smallDescription}
