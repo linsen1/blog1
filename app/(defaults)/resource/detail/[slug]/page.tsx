@@ -25,7 +25,7 @@ const PageComponent = async ({params}: Params) => {
     return (
         <>
 
-            <ul className="flex space-x-2 rtl:space-x-reverse">
+            <ul className="flex space-x-2 rtl:space-x-reverse py-4">
                 <li>
                     <Link href="/" className="text-primary hover:underline">
                         首页
