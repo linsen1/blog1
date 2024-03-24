@@ -57,7 +57,7 @@ export const myPortableTextComponents:PortableTextComponents = {
     list: {
         // Ex. 1: customizing common list types
         bullet: ({children}) =>  <div className="w-full  rounded-md  p-5">
-            <ul className="space-y-3 font-semibold">{children}</ul></div>,
+            <ul className="space-y-3">{children}</ul></div>,
         number: ({children}) => <div className="w-full  rounded-md  p-5">
             <ol className="mt-lg">{children}</ol></div>,
 
@@ -69,7 +69,7 @@ export const myPortableTextComponents:PortableTextComponents = {
         // Ex. 1: customizing common list types
         bullet: ({children}) => <li style={{listStyleType: 'none'}}>
             <IconArrowLeft className="inline text-primary ltr:mr-2 rtl:ml-2 rtl:rotate-180" />
-            <span className="list-text">
+            <span className="text-[18px]">
             {children}
                 </span>
         </li>,
