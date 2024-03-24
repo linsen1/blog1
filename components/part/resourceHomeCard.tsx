@@ -20,7 +20,7 @@ const ResourceHomeCardComponent =async () => {
                               </Link>
 
                           </div>
-                          <p className="mb-1.5 text-xs font-bold text-primary">{new Date(item._createdAt).toLocaleString()}</p>
+                          <p className="mb-1.5 text-xs font-bold text-primary">{new Date(item._createdAt).toLocaleDateString("zh-cn")}</p>
                           <Link href={`/resource/detail/${item.currentSlug}`}>
                               <h5 className="mb-4 text-[18px] font-bold text-[#3b3f5c] leading-normal dark:text-white-light" >
                                   {item.title}
