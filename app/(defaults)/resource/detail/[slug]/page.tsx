@@ -114,7 +114,7 @@ const PageComponent = async ({params}: Params) => {
                         <h1 className="text-[16px] dark:text-white-light">热门标签</h1>
                     </div>
 
-                    <div className="flex gap-4 w-full">
+                    <div className="flex gap-4 w-full flex-wrap">
                         {
                             tags.map((item: any, index: number) => (
                                 <Link href={"/resource/tag-list?tag=" + item.currentSlug} key={index}>

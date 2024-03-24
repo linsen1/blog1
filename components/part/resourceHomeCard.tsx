@@ -22,8 +22,8 @@ const ResourceHomeCardComponent =async () => {
                           </div>
                           <p className="mb-1.5 text-xs font-bold text-primary">{new Date(item._createdAt).toLocaleDateString("zh-cn")}</p>
                           <Link href={`/resource/detail/${item.currentSlug}`}>
-                              <h5 className="mb-4 text-[18px] font-bold text-[#3b3f5c] leading-normal dark:text-white-light" >
-                                  {item.title}
+                              <h5 className="mb-4 flex items-center  h-[60px] text-[18px] font-bold text-[#3b3f5c] leading-normal dark:text-white-light" >
+                                  <span className="line-clamp-2"> {item.title} </span>
                               </h5>
                           </Link>
                           <Link href={`/resource/detail/${item.currentSlug}`}>
@@ -51,7 +51,7 @@ const ResourceHomeCardComponent =async () => {
 
 
                           </div>
-                          <div className="relative mt-3 flex justify-between pt-4 before:absolute before:inset-x-0 before:top-0 before:mx-auto before:h-[1px] before:w-[250px] before:bg-white-light dark:before:bg-[#1b2e4b]">
+                          <div className="relative mt-3 flex justify-between pt-4 before:absolute before:inset-x-0 before:top-0 before:mx-auto before:h-[1px] before:w-full before:bg-white-light dark:before:bg-[#1b2e4b]">
                               <div className="flex items-center font-semibold">
                                   <div className="inline-block h-9 w-9 shrink-0 overflow-hidden rounded-full ltr:mr-2 rtl:ml-2.5">
                                    <span className="flex h-full w-full items-center justify-center bg-[#515365] text-white-light relative">

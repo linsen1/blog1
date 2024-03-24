@@ -16,13 +16,15 @@ const LiftStyleHomeComponent = async () => {
                 data.map(
                     (item:any,index:number)=>(
                         <div key={index} className="space-y-5 rounded-md border border-white-light bg-white p-5 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20),0px_12px_24px_-4px_rgba(145,158,171,0.12)] dark:border-[#1B2E4B] dark:bg-black">
-                            <div className="max-h-56 overflow-hidden rounded-md">
+                            <div className="h-56 overflow-hidden rounded-md">
                                 <Link href={`/liftstyle/detail/${item.currentSlug}`}>
                                 <img src={item.coverImage} alt={item.title} className="w-full object-cover" />
                                 </Link>
                             </div>
                             <Link href={`/liftstyle/detail/${item.currentSlug}`}>
-                            <h5 className="text-xl dark:text-white my-4">{item.title}</h5>
+                            <h5 className="my-4 text-[#3b3f5c] h-[60px] text-xl font-semibold mb-4 dark:text-white-light  leading-8">
+                                <span className="line-clamp-2">{item.title}</span>
+                            </h5>
                             </Link>
                             <div className="flex">
                                 <div className="me-4 overflow-hidden rounded-full bg-white-dark">

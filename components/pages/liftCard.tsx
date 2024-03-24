@@ -19,7 +19,7 @@ const LiftCardComponent:React.FC<LifeCardProps> = ({...pros}) => {
     return (
         <div>
             <div
-                className="space-y-5 h-auto rounded-md border border-white-light bg-white p-5 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20),0px_12px_24px_-4px_rgba(145,158,171,0.12)] dark:border-[#1B2E4B] dark:bg-black">
+                className="space-y-5 rounded-md border border-white-light bg-white p-5 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20),0px_12px_24px_-4px_rgba(145,158,171,0.12)] dark:border-[#1B2E4B] dark:bg-black">
                 <Link href={`/liftstyle/detail/${pros.slug}`}>
                 <div className="h-40 overflow-hidden rounded-md grid place-content-center">
                     <img src={pros.url} className="w-full object-cover" alt={pros.title}  />
@@ -27,8 +27,8 @@ const LiftCardComponent:React.FC<LifeCardProps> = ({...pros}) => {
                 </Link>
 
                 <Link href={`/liftstyle/detail/${pros.slug}`}>
-                <h5 className="text-xl my-4  dark:text-white">
-                    {pros.title}
+                <h5 className="my-4 text-[#3b3f5c] h-[60px] text-xl font-semibold mb-4 dark:text-white-light  leading-8">
+                    <span className="line-clamp-2">{pros.title}</span>
                 </h5>
                 </Link>
                 <div className="flex">

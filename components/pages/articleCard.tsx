@@ -29,20 +29,22 @@ const ArticleCard = ({key,url,alt,data,title,content,author,avatar,slug,tags}:Ar
 
                            <Link href={`/article/article-detail/${slug}`}>
                            <Image
-
-
                                src={url} alt={alt}  fill  objectFit="cover" ></Image>
                            </Link>
 
                        </div>
-                       <p className="mb-1.5 text-xs font-bold text-primary">{new Date(data).toLocaleDateString("zh-cn")}</p>
+                       <p className="mb-4 text-xs font-bold text-primary">{new Date(data).toLocaleDateString("zh-cn")}</p>
+                       <div className="h-[60px] grid justify-start items-center ">
+                           <h5 className="  text-[18px] font-bold text-[#3b3f5c]  dark:text-white-light leading-7" >
+                               <Link href={`/article/article-detail/${slug}`}>
+                               <span className="line-clamp-2"> {title} </span>
+                               </Link>
+                           </h5>
+                       </div>
+
+
                        <Link href={`/article/article-detail/${slug}`}>
-                       <h5 className="mb-4 text-[18px] font-bold text-[#3b3f5c] leading-normal dark:text-white-light" >
-                           {title}
-                       </h5>
-                       </Link>
-                       <Link href={`/article/article-detail/${slug}`}>
-                       <p className="text-white-dark  line-clamp-2 ">{content}</p>
+                       <p className="text-white-dark  line-clamp-2 my-2 ">{content}</p>
                        </Link>
                        <div className="flex gap-2 m-3">
                            <span className="hidden bg-primary
@@ -61,7 +63,7 @@ const ArticleCard = ({key,url,alt,data,title,content,author,avatar,slug,tags}:Ar
                                ))
                            }
                        </div>
-                       <div className="relative mt-3 flex justify-between pt-4 before:absolute before:inset-x-0 before:top-0 before:mx-auto before:h-[1px] before:w-[250px] before:bg-white-light dark:before:bg-[#1b2e4b]">
+                       <div className="relative mt-3 flex justify-between pt-4 before:absolute before:inset-x-0 before:top-0 before:mx-auto before:h-[1px] before:w-full before:bg-white-light dark:before:bg-[#1b2e4b]">
                            <div className="flex items-center font-semibold">
                                <div className="inline-block h-9 w-9 shrink-0 overflow-hidden rounded-full ltr:mr-2 rtl:ml-2.5">
                                    <span className="flex h-full w-full items-center justify-center bg-[#515365] text-white-light relative">

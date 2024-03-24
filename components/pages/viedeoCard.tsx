@@ -39,7 +39,7 @@ const VideoCardComponent = ({key,url,alt,data,title,content,author,avatar,slug,t
                                     >
                                         <IconPlayCircle className="h-[62px] w-[62px]" fill={true} />
                                     </button>
-                                    <div className="absolute bottom-0 left-0 w-full bg-white/30 px-5 py-[22px] text-center text-xl text-white backdrop-blur-[5px]">{title}</div>
+                                    <div className="absolute bottom-0 left-0 w-full bg-white/30 px-5 py-[22px] text-center text-xl text-[#3b3f5c] font-semibold backdrop-blur-[5px] line-clamp-1">{title}</div>
                                 </div>
                             </Link>
                         </div>

@@ -25,7 +25,10 @@ const VideoHomeComponent = async () => {
                                 >
                                     <IconPlayCircle className="h-[62px] w-[62px]" fill />
                                 </button>
-                                <div className="absolute bottom-0 left-0 w-full bg-white/30 px-5 py-[22px] text-center text-xl text-white backdrop-blur-[5px]">{item.title}</div>
+
+                                <div className="absolute bottom-0 left-0 w-full bg-white/30 px-5 py-[22px] text-center text-xl text-[#3b3f5c] font-semibold backdrop-blur-[5px] ">
+                                   <span className="line-clamp-1"> {item.title} </span>
+                                </div>
                             </div>
                         </Link>
                     </div>
