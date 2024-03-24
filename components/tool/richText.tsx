@@ -1,7 +1,6 @@
 import React from 'react';
 import {PortableTextComponents} from "@portabletext/react";
 import {urlFor} from "@/components/lib/client";
-import CodeHighlight from "@/components/highlight";
 import IconArrowLeft from "@/components/icon/icon-arrow-left";
 import {Prism, SyntaxHighlighterProps }from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
