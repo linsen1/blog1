@@ -7,6 +7,7 @@ import 'highlight.js/styles/monokai-sublime.css';
 import {getTags,getPost} from "@/components/lib/interface";
 import RightInfoComponent from "@/components/pages/rightInfo";
 import {richTextStyles, myPortableTextComponents} from "@/components/tool/richText";
+import {Metadata} from "next";
 
 
 interface Params {
@@ -34,6 +35,21 @@ async function getBooks(id: string) {
 
 
 export const revalidate = 60;
+
+
+
+export async function generateMetadata({
+                                           params,
+                                       }: Params): Promise<Metadata> {
+    const post = await getPost(params?.slug);
+    return {
+        title: post.title,
+        description: post.smallDescription,
+    };
+}
+
+
+
 
 const PageComponent = async ({params}: Params) => {
     // console.log(params, "parmas");

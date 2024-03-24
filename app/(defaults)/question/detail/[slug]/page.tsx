@@ -6,6 +6,7 @@ import {PortableText} from '@portabletext/react'
 import { getQuestionPost, getTags} from "@/components/lib/interface";
 import RightInfoComponent from "@/components/pages/rightInfo";
 import {richTextStyles, myPortableTextComponents} from "@/components/tool/richText";
+import {Metadata} from "next";
 
 
 
@@ -17,6 +18,19 @@ interface Params {
 
 
 export const revalidate = 60;
+
+
+export async function generateMetadata({
+                                           params,
+                                       }: Params): Promise<Metadata> {
+    const post = await getQuestionPost(params?.slug);
+    return {
+        title: post.title,
+        description: post.smallDescription,
+    };
+}
+
+
 
 const PageComponent = async ({params}: Params) => {
 

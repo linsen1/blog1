@@ -1,9 +1,10 @@
 import React from 'react';
 import Link from "next/link";
 import {PortableText} from '@portabletext/react'
-import { getLiftPost} from "@/components/lib/interface";
+import {getLiftPost} from "@/components/lib/interface";
 import RightInfoComponent from "@/components/pages/rightInfo";
 import {richTextStyles, myPortableTextComponents} from "@/components/tool/richText";
+import {Metadata} from "next";
 
 
 
@@ -14,6 +15,18 @@ interface Params {
 }
 
 export const revalidate = 60;
+
+
+export async function generateMetadata({
+                                           params,
+                                       }: Params): Promise<Metadata> {
+    const post = await getLiftPost(params?.slug);
+    return {
+        title: post.title,
+        description: post.smallDescription,
+    };
+}
+
 
 const PageComponent = async ({params}: Params) => {
 

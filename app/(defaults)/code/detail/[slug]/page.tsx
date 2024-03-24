@@ -1,11 +1,10 @@
 import React from 'react';
 import Link from "next/link";
-import {urlFor} from "@/components/lib/client";
-import CodeHighlight from "@/components/highlight";
 import {PortableText} from '@portabletext/react'
-import {getCodePost, getTags} from "@/components/lib/interface";
+import {getCodePost,  getTags} from "@/components/lib/interface";
 import RightInfoComponent from "@/components/pages/rightInfo";
 import {richTextStyles, myPortableTextComponents} from "@/components/tool/richText";
+import {Metadata} from "next";
 
 
 
@@ -14,6 +13,18 @@ interface Params {
         slug: string
     }
 }
+
+
+export async function generateMetadata({
+                                           params,
+                                       }: Params): Promise<Metadata> {
+    const post = await getCodePost(params?.slug);
+    return {
+        title: post.title,
+        description: post.smallDescription,
+    };
+}
+
 
 
 const PageComponent = async ({params}: Params) => {

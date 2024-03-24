@@ -1,16 +1,19 @@
 import React from 'react';
-import IconCaretsDown from "@/components/icon/icon-carets-down";
-import IconCaretDown from "@/components/icon/icon-caret-down";
 import {Metadata} from "next";
 import QuestionCardComponent from "@/components/pages/questionCard";
 import { getQuestionTagList} from "@/components/lib/interface";
 import Pagination from "@/components/pages/pagination";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-    title: '面试题',
-};
+
 export const revalidate = 60;
+
+export async function generateMetadata({searchParams}:{searchParams:{tag:string}}): Promise<Metadata> {
+
+    return {
+        title: `${searchParams.tag} | 面试题`,
+    };
+}
 
 const PageComponent = async ({searchParams}: any) => {
 

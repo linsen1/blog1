@@ -12,6 +12,7 @@ export const metadata: Metadata = {
         template: '%s | 前端达人',
         default: '前端达人',
     },
+    description: '专注分享当下最实用的前端技术。关注前端达人，与达人一起学习进步！',
 };
 const nunito = Nunito({
     weight: ['400', '500', '600', '700', '800'],
@@ -32,6 +33,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     crossOrigin="anonymous"
                     strategy="afterInteractive"
 
+                />
+
+                <Script
+                    src="https://hm.baidu.com/hm.js?803d8995d7e5b99ff7bdadd582ca9b66"
                 />
             </body>
 

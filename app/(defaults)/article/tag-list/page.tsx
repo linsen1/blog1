@@ -4,16 +4,18 @@ import {client, urlFor} from "@/components/lib/client";
 import Link from "next/link";
 import ArticleCard from "@/components/pages/articleCard";
 import Pagination from "@/components/pages/pagination";
-import {getArticleTagList} from "@/components/lib/interface";
+import {getArticleTagList, getVideoPost} from "@/components/lib/interface";
 
 
 
 
 
-export const metadata: Metadata = {
-    title: 'tag标签-前端达人',
-};
+export async function generateMetadata({searchParams}:{searchParams:{tag:string}}): Promise<Metadata> {
 
+    return {
+        title: `${searchParams.tag} | 文章`,
+    };
+}
 export const revalidate = 60;
 
 

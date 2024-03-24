@@ -5,12 +5,17 @@ import CodeCardComponent from "@/components/pages/codeCard";
 import Pagination from "@/components/pages/pagination";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-    title: '代码',
-};
 
 
 export const revalidate = 60;
+
+
+export async function generateMetadata({searchParams}:{searchParams:{tag:string}}): Promise<Metadata> {
+
+    return {
+        title: `${searchParams.tag} | 代码`,
+    };
+}
 
 const PageComponent = async ({searchParams}:any) => {
 

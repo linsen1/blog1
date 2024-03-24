@@ -6,10 +6,12 @@ import Pagination from "@/components/pages/pagination";
 import Link from "next/link";
 
 
-export const metadata: Metadata = {
-    title: '视频',
-};
+export async function generateMetadata({searchParams}:{searchParams:{tag:string}}): Promise<Metadata> {
 
+    return {
+        title: `${searchParams.tag} | 视频`,
+    };
+}
 export const revalidate = 60;
 
 const tagPage =async ({searchParams}:any) => {

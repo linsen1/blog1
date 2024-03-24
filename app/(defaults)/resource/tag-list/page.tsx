@@ -6,11 +6,16 @@ import Pagination from "@/components/pages/pagination";
 import ResourceCard from "@/components/pages/resourceCard";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-    title: '资源与工具',
-};
+
 
 export const revalidate = 60;
+
+export async function generateMetadata({searchParams}:{searchParams:{tag:string}}): Promise<Metadata> {
+
+    return {
+        title: `${searchParams.tag} | 资源与工具`,
+    };
+}
 
 const PageComponent = async ({searchParams}:any) => {
 

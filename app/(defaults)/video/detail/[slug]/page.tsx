@@ -1,13 +1,12 @@
 
 import React from 'react';
 import Link from "next/link";
-import {getTags, getVideoPost} from "@/components/lib/interface";
+import { getTags, getVideoPost} from "@/components/lib/interface";
 import {PortableText} from '@portabletext/react'
-import {urlFor} from "@/components/lib/client";
-import CodeHighlight from "@/components/highlight";
 import VideoPlayer from "@/components/pages/videoPlayer";
 import RightInfoComponent from "@/components/pages/rightInfo";
 import {richTextStyles, myPortableTextComponents} from "@/components/tool/richText";
+import {Metadata} from "next";
 
 
 
@@ -19,6 +18,17 @@ interface Params {
 
 
 export const revalidate = 60;
+
+export async function generateMetadata({
+                                           params,
+                                       }: Params): Promise<Metadata> {
+    const post = await getVideoPost(params?.slug);
+    return {
+        title: post.title,
+        description: post.smallDescription,
+    };
+}
+
 
 const PageComponent = async ({params}: Params) => {
 
