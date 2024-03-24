@@ -30,7 +30,7 @@ const LiftStyleHomeComponent = async () => {
                                 </div>
                                 <div className="flex-1">
                                     <h4 className="mb-1.5 font-semibold dark:text-white">前端达人</h4>
-                                    <p>{new Date(item._createdAt).toLocaleString()}</p>
+                                    <p>{new Date(item._createdAt).toLocaleDateString("zh-cn")}</p>
                                 </div>
                             </div>
                         </div>
