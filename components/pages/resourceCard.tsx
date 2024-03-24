@@ -35,7 +35,7 @@ const ResourceCardComponent = ({key,url,alt,data,title,content,author,avatar,slu
                     </div>
                     <p className="mb-1.5 text-xs font-bold text-primary">{new Date(data).toLocaleDateString("zh-cn")}</p>
                     <Link href={`/resource/detail/${slug}`}>
-                        <h5 className="mb-4 text-[18px] font-bold text-[#3b3f5c] leading-normal dark:text-white-light" >
+                        <h5 className="mb-4 text-[18px] h-10 font-bold text-[#3b3f5c] leading-normal dark:text-white-light" >
                             {title}
                         </h5>
                     </Link>

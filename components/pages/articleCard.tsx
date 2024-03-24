@@ -29,20 +29,22 @@ const ArticleCard = ({key,url,alt,data,title,content,author,avatar,slug,tags}:Ar
 
                            <Link href={`/article/article-detail/${slug}`}>
                            <Image
-
-
                                src={url} alt={alt}  fill  objectFit="cover" ></Image>
                            </Link>
 
                        </div>
-                       <p className="mb-1.5 text-xs font-bold text-primary">{new Date(data).toLocaleDateString("zh-cn")}</p>
+                       <p className="mb-4 text-xs font-bold text-primary">{new Date(data).toLocaleDateString("zh-cn")}</p>
+                       <div className="h-[60px] grid justify-start items-center line-clamp-2">
+                           <h5 className="  text-[18px] font-bold text-[#3b3f5c]  dark:text-white-light leading-7" >
+                               <Link href={`/article/article-detail/${slug}`}>
+                               <span className="line-clamp-2"> {title} </span>
+                               </Link>
+                           </h5>
+                       </div>
+
+
                        <Link href={`/article/article-detail/${slug}`}>
-                       <h5 className="mb-4 text-[18px] font-bold text-[#3b3f5c] leading-normal dark:text-white-light" >
-                           {title}
-                       </h5>
-                       </Link>
-                       <Link href={`/article/article-detail/${slug}`}>
-                       <p className="text-white-dark  line-clamp-2 ">{content}</p>
+                       <p className="text-white-dark  line-clamp-2 my-2 ">{content}</p>
                        </Link>
                        <div className="flex gap-2 m-3">
                            <span className="hidden bg-primary
